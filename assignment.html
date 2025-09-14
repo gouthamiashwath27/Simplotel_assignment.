@@ -1,332 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Website</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gourmet Delight</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <style>
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2c3e50;
+      line-height: 1.6;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
 
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-        }
+    /* Header Styles */
+    header {
+      background-color: #ff6b6b;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        .header {
-            background-color: #ff6b6b;
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+    }
 
-        .nav-container {
-            max-width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 40px;
-            gap: 40px;
-        }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #2c3e50;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 60px;
-        }
+    .logo i {
+      margin-right: 0.5rem;
+      color: #2c3e50;
+    }
 
-        .nav-links a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-            font-family: Georgia, serif;
-        }
+    /* Hamburger Menu (CSS Only) */
+    #menu-toggle {
+      display: none;
+    }
 
-        .hamburger {
-            width: 30px;
-            height: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-        }
+    .menu-button {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
 
-        .hamburger span {
-            width: 100%;
-            height: 3px;
-            background-color: #2c3e50;
-        }
+    .menu-button span {
+      width: 25px;
+      height: 3px;
+      background-color: #2c3e50;
+      margin: 2px 0;
+      transition: 0.3s;
+    }
 
-        .main-content {
-            display: flex;
-            min-height: calc(100vh - 80px);
-        }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
 
-        .left-section {
-            flex: 0 0 42%;
-            background: linear-gradient(to right, #f9f1a5, #ffced5);
-            display: flex;
-            align-items: center;
-            padding: 80px 60px;
-        }
+    .nav-links a {
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
 
-        .content-wrapper {
-            max-width: 500px;
-        }
+    .nav-links a:hover {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
 
-        .content-wrapper h1 {
-            font-size: 64px;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            line-height: 1.1;
-            font-family: Arial, sans-serif;
-        }
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 90vh;
+    }
 
-        .content-wrapper p {
-            font-size: 18px;
-            color: #2c3e50;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            text-align: left;
-        }
+    .text-section {
+      flex: 1;
+      min-width: 300px;
+      background: linear-gradient(to right, #f9f1a5, #ffced5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
 
-        .btn {
-            background-color: #ff6b6b;
-            color: white;
-            padding: 15px 66px;
-            border: none;
-            font-size: 15px;
-            font-weight: 400;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    .text-content {
+      max-width: 500px;
+    }
 
-        .btn:hover {
-            background-color: #ff5252;
-        }
+    .text-content h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
 
-        .right-section {
-            flex: 0 0 58%;
-            background-image: url('images/image4.jpg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: calc(100vh - 80px);
-        }
+    .text-content p {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: #2c3e50;
+      margin-bottom: 2rem;
+    }
 
-        .bottom-section {
-            background: linear-gradient(to right, #f9f1a5, #ffced5, #faa2fa);
-            padding: 80px 0;
-        }
+    .btn {
+      background-color: #ff6b6b;
+      color: white;
+      padding: 1rem 2.5rem;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      display: inline-block;
+    }
 
-        .bottom-container {
-            max-width: 1200px;
-            margin: 0;
-            display: flex;
-            gap: 40px;
-            padding: 0 60px;
-            align-items: flex-start;
-        }
+    .btn:hover {
+      background-color: #ff5252;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
 
-        .bottom-left {
-            flex: 0 0 60%;
-        }
-        p {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-}
-.section {
-  flex: 1 1 50%; /* 50% on big screens, wraps on small */
-}
-@media (max-width: 992px) {
-  .nav { flex-direction: column; }
-  .content { padding: 20px; }
-}
-img {
-  max-width: 100%;
-  height: auto;
-}
-.container { width: 100%; max-width: 1200px; margin: auto; }
+    .image-section {
+      flex: 1;
+      min-width: 300px;
+      min-height: 50vh;
+      background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1000&q=80');
+      background-size: cover;
+      background-position: center;
+    }
 
+    /* Gallery Section */
+    .gallery {
+      background: linear-gradient(to right, #f9f1a5, #ffced5, #faa2fa);
+      padding: 4rem 0;
+    }
 
-        .image-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 20px;
-            height: 500px;
-        }
+    .gallery-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 0 1.5rem;
+    }
 
-        .grid-image {
-            background-size: cover;
-            background-position: center;
-        }
+    .gallery-images {
+      flex: 1;
+      min-width: 300px;
+    }
 
-        .grid-image.image1 {
-            grid-column: 1;
-            grid-row: 1;
-            background-image: url('images/image1.jpg.jpg');
-        }
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
 
-        .grid-image.image2 {
-            grid-column: 1;
-            grid-row: 2;
-            background-image: url('images/image2.jpg.jpg');
-        }
+    .grid-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
 
-        .grid-image.image3 {
-            grid-column: 2;
-            grid-row: 1 / 3;
-            background-image: url('images/image3..jpg.jpg');
-        }
+    .grid-image:hover {
+      transform: scale(1.03);
+    }
 
-        .bottom-right {
-            flex: 0 0 40%;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-start;
-        }
+    .grid-image:nth-child(1) {
+      background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80');
+    }
 
-        .bottom-text-box {
-            background-color: #f96c6a;
-            padding: 8px 40px;
-            text-align: left;
-            max-width: 400px;
-            width: 85%;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding-top: 14px;
-            margin-top: 140px;
-        }
+    .grid-image:nth-child(2) {
+      background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=80');
+    }
 
-        .bottom-text-small {
-            font-size: 15px;
-            color: rgb(5, 3, 3);
-            margin-bottom: 10px;
-            text-align: left;
-            margin-left: 0;
-        }
+    .grid-image:nth-child(3) {
+      background-image: url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=80');
+    }
 
-        .bottom-text-large {
-            font-size: 38px;
-            font-weight: bold;
-            color: rgb(26, 16, 16);
-            margin-bottom: 40px;
-            line-height: 1.1;
-            text-align: left;
-            margin-left: 0;
-        }
+    .gallery-text {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .bottom-click-text {
-            font-size: 15px;
-            color: rgb(10, 7, 7);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            text-align: left;
-            margin-left: 0;
-            margin-top: -10px;
-        }
+    .text-box {
+      background-color: #f96c6a;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-        .arrow {
-            font-weight: bold;
-        }
+    .text-box h2 {
+      font-size: 1.2rem;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
 
-        @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
-            }
-            
-            .left-section {
-                flex: 1;
-                padding: 40px 20px;
-            }
-            
-            .right-section {
-                flex: 1;
-                min-height: 400px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .content-wrapper h1 {
-                font-size: 36px;
-            }
-        }
-    </style>
+    .text-box h3 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .cta-link {
+      font-size: 1.1rem;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+      font-weight: 600;
+    }
+
+    .cta-link:hover {
+      transform: translateX(5px);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .footer-content p {
+      margin: 1rem 0;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ff6b6b;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .menu-button {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #ff6b6b;
+        padding: 1rem 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #menu-toggle:checked ~ .nav-links {
+        display: flex;
+      }
+
+      .nav-links a {
+        display: block;
+        text-align: center;
+        padding: 0.8rem;
+      }
+
+      .hero {
+        flex-direction: column;
+      }
+
+      .text-section {
+        order: 2;
+        padding: 3rem 1.5rem;
+      }
+
+      .image-section {
+        order: 1;
+        min-height: 40vh;
+      }
+
+      .gallery-container {
+        flex-direction: column;
+      }
+
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-container {
+        padding: 0 1rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .text-content {
+        text-align: center;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .text-box {
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <div class="nav-container">
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#order">Order</a></li>
-                    <li><a href="#food">Food</a></li>
-                    <li><a href="#restaurant">Restaurant</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                </ul>
-            </nav>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+  <!-- Header with Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <i class="fas fa-utensils"></i>
+        Gourmet Delight
+      </a>
+      
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#reservations">Reservations</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="text-section">
+      <div class="text-content">
+        <h1>Experience The Finest Dining</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+        <a href="#reservations" class="btn">Reserve a Table</a>
+      </div>
+    </div>
+    <div class="image-section"></div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-container">
+      <div class="gallery-images">
+        <div class="image-grid">
+          <div class="grid-image"></div>
+          <div class="grid-image"></div>
+          <div class="grid-image"></div>
         </div>
-    </header>
-
-    <main class="main-content">
-        <section class="left-section">
-            <div class="content-wrapper">
-                <h1>LOREM IPSUM</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <button class="btn">Click Me</button>
-            </div>
-        </section>
-
-        <section class="right-section">
-        </section>
-    </main>
-
-    <!-- Bottom Gallery Section -->
-    <section class="bottom-section">
-        <div class="bottom-container">
-            <div class="bottom-left">
-                <div class="image-grid">
-                    <div class="grid-image image1"></div>
-                    <div class="grid-image image2"></div>
-                    <div class="grid-image image3"></div>
-                </div>
-            </div>
-            <div class="bottom-right">
-                <div class="bottom-text-box">
-                    <div class="bottom-text-small">LOREM IPSUM</div>
-                    <div class="bottom-text-large">LOREM IPSUM SET ADEMIR</div>
-                    <div class="bottom-click-text">
-                        Click <span class="arrow" font-size="20px">➔</span>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="gallery-text">
+        <div class="text-box">
+          <h2>OUR SPECIALTIES</h2>
+          <h3>EXPERIENCE THE TASTE OF PERFECTION</h3>
+          <div class="cta-link">
+            Explore Our Menu <span class="arrow">➔</span>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-content">
+      <h3>Gourmet Delight Restaurant</h3>
+      <p>123 Culinary Street, Foodville, CA 98765</p>
+      <p>Open Monday-Sunday: 11am - 10pm</p>
+      
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+      </div>
+      
+      <p>Reservations: (123) 456-7890</p>
+      <p>Email: info@gourmetdelight.com</p>
+      <p>&copy; 2023 Gourmet Delight. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
